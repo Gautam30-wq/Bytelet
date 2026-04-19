@@ -159,27 +159,22 @@ Open `index.html` in browser for basic functionality testing
 ## 📁 Project Structure
 
 ```
-hack/
-├── index.html              # Simple test interface
-├── script.js               # Basic client-side logic
-├── test.js                 # API connectivity test
-├── package.json            # Root dependencies
-└── llm_firewall/
-    ├── backend/
-    │   ├── server.js       # Main Express server
-    │   ├── test_firewall.js # Firewall test suite
-    │   ├── package.json    # Backend dependencies
-    │   └── firewall/
-    │       ├── Firewall.js # Scanner orchestrator
-    │       ├── middleware.js # Express middleware
-    │       ├── Sanitizer.js # Content sanitizer
-    │       └── scanners/
-    │           ├── RegexScanner.js # Pattern-based scanner
-    │           └── LLMScanner.js   # AI-powered scanner
-    └── frontend/
-        ├── index.html      # Main web interface
-        ├── style.css       # Cyberpunk styling
-        └── script.js       # Frontend interactions
+aegisguard/
+  ├── backend/
+  │   ├── server.js       # Main Express server
+  │   ├── test_firewall.js # Firewall test suite
+  │   ├── package.json    # Backend dependencies
+  │   └── firewall/
+  │       ├── Firewall.js # Scanner orchestrator
+  │       ├── middleware.js # Express middleware
+  │       ├── Sanitizer.js # Content sanitizer
+  │       └── scanners/
+  │           ├── RegexScanner.js # Pattern-based scanner
+  │           └── LLMScanner.js   # AI-powered scanner
+  └── frontend/
+      ├── index.html      # Main web interface
+      ├── style.css       # Cyberpunk styling
+      └── script.js       # Frontend interactions
 ```
 
 ## 🔧 Configuration
@@ -235,3 +230,4 @@ This system provides layered protection but is not infallible. Always:
 ---
 
 Built with ❤️ for secure AI interactions
+** git must be installed on system to run git commands on terminal **
