@@ -1,6 +1,9 @@
+import { InputNormalizer } from "./InputNormalizer.js";
+
 export class Firewall {
   constructor() {
     this.scanners = [];
+    this.normalizer = new InputNormalizer();
   }
 
   use(scanner) {
@@ -8,14 +11,21 @@ export class Firewall {
     return this;
   }
 
-  async scan(text) {
+  async scan(rawText) {
+    // ── Step 0: Normalize — decode all obfuscation layers first ─────────────
+    const normalizedText = this.normalizer.normalize(rawText);
+    const decodeNote = this.normalizer.describe(rawText, normalizedText);
+    if (decodeNote) {
+      console.log(`🔍 [Firewall] ${decodeNote}`);
+    }
+
     let totalScore = 0;
     const details = [];
 
-    // Run all scanners sequentially
+    // ── Step 1: Run all scanners on the NORMALIZED text ────────────────────
     for (const scanner of this.scanners) {
       try {
-        const result = await scanner.evaluate(text);
+        const result = await scanner.evaluate(normalizedText);
         if (result && result.score > 0) {
           totalScore += result.score;
           details.push({
@@ -39,7 +49,8 @@ export class Firewall {
     return {
       status,
       score: totalScore,
-      details
+      details,
+      wasNormalized: normalizedText !== rawText  // flag if any decoding happened
     };
   }
 }
